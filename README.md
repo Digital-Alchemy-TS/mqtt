@@ -1,6 +1,6 @@
 ## 📚 Description
 
-Welcome to `@digital-alchemy/mqtt`!
+Welcome to `@digital-alchemy/mqtt-extension`!
 
 - 🐙 [GitHub](https://github.com/Digital-Alchemy-TS/mqtt)
 - 💬 [Discord](https://discord.digital-alchemy.app)
@@ -10,11 +10,11 @@ Welcome to `@digital-alchemy/mqtt`!
 
 This library can be installed as a simple dependency
 ```bash
-npm i @digital-alchemy/mqtt
+npm i @digital-alchemy/mqtt-extension
 ```
 Then added to your project
 ```typescript
-import { LIB_MQTT } from "@digital-alchemy/mqtt";
+import { LIB_MQTT } from "@digital-alchemy/mqtt-extension";
 
 // application
 const MY_APP = CreateApplication({
