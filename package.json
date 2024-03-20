@@ -2,7 +2,7 @@
   "name": "@digital-alchemy/mqtt-extension",
   "repository": "https://github.com/Digital-Alchemy-TS/mqtt",
   "homepage": "https://docs.digital-alchemy.app/03-Support-Libraries/03.02-mqtt/%F0%9F%A7%AD-MQTT-Overview",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "scripts": {
     "build": "rm -rf dist/; tsc",
     "lint": "eslint src",
