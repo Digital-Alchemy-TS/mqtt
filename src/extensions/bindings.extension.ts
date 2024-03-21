@@ -179,32 +179,34 @@ export function MQTT_Bindings({
     parse = "none",
     options = {},
   }: MQTTSubscribeOptions): void {
-    [topic].flat().forEach(topic => {
-      // If multiple things subscribe, they must all agree on the data format
-      if (MESSAGE_PARSE.has(topic)) {
-        const current = MESSAGE_PARSE.get(topic);
-        if (current !== parse) {
-          throw new InternalError(
-            bindingsContext,
-            "MISMATCHED_PARSING",
-            `${topic} currently has parse format of ${current}, conflicting with with ${parse}`,
-          );
+    lifecycle.onBootstrap(() => {
+      [topic].flat().forEach(topic => {
+        // If multiple things subscribe, they must all agree on the data format
+        if (MESSAGE_PARSE.has(topic)) {
+          const current = MESSAGE_PARSE.get(topic);
+          if (current !== parse) {
+            throw new InternalError(
+              bindingsContext,
+              "MISMATCHED_PARSING",
+              `${topic} currently has parse format of ${current}, conflicting with with ${parse}`,
+            );
+          }
+          return;
         }
-        return;
-      }
-      MESSAGE_PARSE.set(topic, parse);
-      listen(topic, { ...translateOptions(options), qos: 1 });
-      const callbacks = CALLBACKS.get(topic) ?? ([] as MqttCallback[]);
-      callbacks.push(async (message, packet) => {
-        await internal.safeExec({
-          duration: MQTT_MESSAGE_HANDLING_TIME,
-          errors: MQTT_MESSAGE_EXECUTIONS,
-          exec: async () => await exec(message, packet),
-          executions: MQTT_MESSAGE_ERRORS,
-          labels: { context, label, topic },
+        MESSAGE_PARSE.set(topic, parse);
+        listen(topic, { ...translateOptions(options), qos: 1 });
+        const callbacks = CALLBACKS.get(topic) ?? ([] as MqttCallback[]);
+        callbacks.push(async (message, packet) => {
+          await internal.safeExec({
+            duration: MQTT_MESSAGE_HANDLING_TIME,
+            errors: MQTT_MESSAGE_EXECUTIONS,
+            exec: async () => await exec(message, packet),
+            executions: MQTT_MESSAGE_ERRORS,
+            labels: { context, label, topic },
+          });
         });
+        CALLBACKS.set(topic, callbacks);
       });
-      CALLBACKS.set(topic, callbacks);
     });
   }
 

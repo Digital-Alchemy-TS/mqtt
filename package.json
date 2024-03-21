@@ -1,8 +1,8 @@
 {
   "name": "@digital-alchemy/mqtt-extension",
   "repository": "https://github.com/Digital-Alchemy-TS/mqtt",
-  "homepage": "https://docs.digital-alchemy.app/03-Support-Libraries/03.02-mqtt/%F0%9F%A7%AD-MQTT-Overview",
-  "version": "0.3.2",
+  "homepage": "https://docs.digital-alchemy.app/MQTT",
+  "version": "0.3.3",
   "scripts": {
     "build": "rm -rf dist/; tsc",
     "lint": "eslint src",
@@ -24,8 +24,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@digital-alchemy/core": "^0.3.3",
-    "mqtt": "^5.4.0",
+    "@digital-alchemy/core": "^0.3.6",
+    "mqtt": "^5.5.0",
     "mqtt-packet": "^9.0.0",
     "prom-client": "^15.1.0"
   },
@@ -36,15 +36,15 @@
     "@types/js-yaml": "^4.0.9",
     "@types/minimist": "^1.2.5",
     "@types/mute-stream": "^0.0.4",
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.11.30",
     "@types/uuid": "^9.0.8",
     "@types/ws": "^8.5.10",
-    "@typescript-eslint/eslint-plugin": "7.2.0",
-    "@typescript-eslint/parser": "7.2.0",
+    "@typescript-eslint/eslint-plugin": "7.3.1",
+    "@typescript-eslint/parser": "7.3.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsonc": "^2.13.0",
+    "eslint-plugin-jsonc": "^2.14.1",
     "eslint-plugin-no-unsanitized": "^4.0.2",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-security": "^2.1.1",
@@ -58,7 +58,7 @@
     "prettier": "^3.2.5",
     "ts-jest": "^29.1.2",
     "tsx": "^4.7.1",
-    "type-fest": "^4.12.0",
-    "typescript": "^5.4.2"
+    "type-fest": "^4.13.1",
+    "typescript": "^5.4.3"
   }
 }
