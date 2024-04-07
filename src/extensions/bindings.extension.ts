@@ -171,14 +171,14 @@ export function MQTT_Bindings({
     });
   }
 
-  function subscribe({
+  function subscribe<DATA = unknown>({
     topic,
     exec,
     context = bindingsContext,
     label,
     parse = "none",
     options = {},
-  }: MQTTSubscribeOptions): void {
+  }: MQTTSubscribeOptions<DATA>): void {
     lifecycle.onBootstrap(() => {
       [topic].flat().forEach(topic => {
         // If multiple things subscribe, they must all agree on the data format
@@ -200,7 +200,7 @@ export function MQTT_Bindings({
           await internal.safeExec({
             duration: MQTT_MESSAGE_HANDLING_TIME,
             errors: MQTT_MESSAGE_EXECUTIONS,
-            exec: async () => await exec(message, packet),
+            exec: async () => await exec(message as DATA, packet),
             executions: MQTT_MESSAGE_ERRORS,
             labels: { context, label, topic },
           });

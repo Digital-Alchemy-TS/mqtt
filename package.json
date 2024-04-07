@@ -2,7 +2,7 @@
   "name": "@digital-alchemy/mqtt-extension",
   "repository": "https://github.com/Digital-Alchemy-TS/mqtt",
   "homepage": "https://docs.digital-alchemy.app/MQTT",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "scripts": {
     "build": "rm -rf dist/; tsc",
     "test": "./scripts/test.sh",
