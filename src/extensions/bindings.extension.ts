@@ -50,30 +50,30 @@ export function MQTT_Bindings({
     client = await connectAsync({
       ...config.mqtt.CLIENT_OPTIONS,
     });
-    logger.info("MQTT Connected");
+    logger.info("mqtt connected");
     logEvents();
     initRouting();
   });
 
   lifecycle.onShutdownStart(async () => {
-    logger.info(`Terminating MQTT connection`);
+    logger.info(`terminating mqtt connection`);
     await new Promise<void>(done => client.end(() => done()));
     client = undefined;
   });
 
   function logEvents() {
     client.on("reconnect", () => {
-      logger.info("MQTT Reconnect");
+      logger.info("mqtt reconnect");
     });
     client.on("end", () => {
-      logger.info("MQTT End");
+      logger.info("mqtt end");
     });
     client.on("error", error => {
-      logger.error({ error }, "MQTT Error");
+      logger.error({ error }, "mqtt error");
       event.emit(MQTT_RECONNECT);
     });
     client.on("close", () => {
-      logger.info("MQTT Close");
+      logger.info("mqtt close");
     });
   }
 
@@ -139,7 +139,7 @@ export function MQTT_Bindings({
                 topic,
                 topicMatches,
               },
-              `Message has multiple topic matches, with different parse formats`,
+              `message has multiple topic matches, with different parse formats`,
             );
           }
           await each(CALLBACKS.get(topicMatch), async exec => {
@@ -217,7 +217,7 @@ export function MQTT_Bindings({
       }
       return message;
     } catch (error) {
-      logger.error({ error, format }, `Failed to parse MQTT message`);
+      logger.error({ error, format }, `failed to parse mqtt message`);
       return message;
     }
   }
