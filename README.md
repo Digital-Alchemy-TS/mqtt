@@ -2,7 +2,7 @@
 
 Welcome to `@digital-alchemy/mqtt-extension`!
 
-- [Extended docs](https://docs.digital-alchemy.app/MQTT)
+- [Extended docs](https://docs.digital-alchemy.app)
 - [Discord](https://discord.gg/JkZ35Gv97Y)
 
 ## 💾 Install
