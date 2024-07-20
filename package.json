@@ -2,13 +2,13 @@
   "name": "@digital-alchemy/mqtt-extension",
   "repository": "https://github.com/Digital-Alchemy-TS/mqtt",
   "homepage": "https://docs.digital-alchemy.app/MQTT",
-  "version": "24.06.1",
+  "version": "24.7.1",
   "scripts": {
     "build": "rm -rf dist/; tsc",
     "test": "./scripts/test.sh",
     "lint": "eslint src",
     "prepublishOnly": "npm run build",
-    "upgrade": "ncu -u -f '@digital-alchemy/*'; npm i"
+    "upgrade": "yarn up '@digital-alchemy/*'"
   },
   "author": {
     "url": "https://github.com/zoe-codez",
@@ -25,13 +25,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@digital-alchemy/core": "^24.6.1",
     "mqtt": "^5.5.2",
     "mqtt-packet": "^9.0.0",
     "prom-client": "^15.1.1"
   },
+  "peerDependencies": {
+    "@digital-alchemy/core": "*"
+  },
   "devDependencies": {
     "@cspell/eslint-plugin": "^8.7.0",
+    "@digital-alchemy/core": "^24.7.2",
     "@types/figlet": "^1.5.8",
     "@types/jest": "^29.5.12",
     "@types/js-yaml": "^4.0.9",
@@ -61,5 +64,6 @@
     "tsx": "^4.7.2",
     "type-fest": "^4.15.0",
     "typescript": "^5.4.5"
-  }
+  },
+  "packageManager": "yarn@4.3.1"
 }
