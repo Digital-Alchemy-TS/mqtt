@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@cspell/eslint-plugin": "^8.7.0",
-    "@digital-alchemy/core": "^24.7.2",
+    "@digital-alchemy/core": "^24.8.3",
     "@types/figlet": "^1.5.8",
     "@types/jest": "^29.5.12",
     "@types/js-yaml": "^4.0.9",
@@ -65,5 +65,5 @@
     "type-fest": "^4.15.0",
     "typescript": "^5.4.5"
   },
-  "packageManager": "yarn@4.3.1"
+  "packageManager": "yarn@4.4.0"
 }

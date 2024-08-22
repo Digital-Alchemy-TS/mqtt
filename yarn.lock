@@ -928,9 +928,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digital-alchemy/core@npm:^24.7.2":
-  version: 24.7.2
-  resolution: "@digital-alchemy/core@npm:24.7.2"
+"@digital-alchemy/core@npm:^24.8.3":
+  version: 24.8.3
+  resolution: "@digital-alchemy/core@npm:24.8.3"
   dependencies:
     chalk: "npm:^5.3.0"
     dayjs: "npm:^1.11.11"
@@ -945,7 +945,7 @@ __metadata:
   dependenciesMeta:
     redis:
       optional: true
-  checksum: 10/d45c39883df79ed85e1245bce833db9147d8749282e985ab0258e77989e2cf1dd6ebe62a6f8e2018ba1c5d9890b60bf03515a4d8f0b220229185a4790cbde9db
+  checksum: 10/016fc0859438a36c211958fb9b128d945a2535657ac3af7a543d4871689e3c71d2dc17f928c92172344f322cdd617cce9a7f77201fc8a1af27d0f097257b1dec
   languageName: node
   linkType: hard
 
@@ -954,7 +954,7 @@ __metadata:
   resolution: "@digital-alchemy/mqtt-extension@workspace:."
   dependencies:
     "@cspell/eslint-plugin": "npm:^8.7.0"
-    "@digital-alchemy/core": "npm:^24.7.2"
+    "@digital-alchemy/core": "npm:^24.8.3"
     "@types/figlet": "npm:^1.5.8"
     "@types/jest": "npm:^29.5.12"
     "@types/js-yaml": "npm:^4.0.9"

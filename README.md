@@ -42,6 +42,13 @@ Add the following to your application's configuration file.
   password=super-strong-password
   port=1883
 ```
+
+or as json in your `.env`
+
+```
+CLIENT_OPTIONS={"host":"localhost","port":1883}
+```
+
 ## 🛠 Usage
 
 > Library is in an "experimental" state
