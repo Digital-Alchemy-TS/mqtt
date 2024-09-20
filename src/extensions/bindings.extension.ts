@@ -10,9 +10,6 @@ import {
 import { QoS } from "mqtt-packet";
 
 import {
-  MQTT_MESSAGE_ERRORS,
-  MQTT_MESSAGE_EXECUTIONS,
-  MQTT_MESSAGE_HANDLING_TIME,
   MQTT_RECONNECT,
   MqttCallback,
   MQTTParseFormat,
@@ -197,13 +194,9 @@ export function MQTT_Bindings({
         listen(topic, { ...translateOptions(options), qos: 1 });
         const callbacks = CALLBACKS.get(topic) ?? ([] as MqttCallback[]);
         callbacks.push(async (message, packet) => {
-          await internal.safeExec({
-            duration: MQTT_MESSAGE_HANDLING_TIME,
-            errors: MQTT_MESSAGE_EXECUTIONS,
-            exec: async () => await exec(message as DATA, packet),
-            executions: MQTT_MESSAGE_ERRORS,
-            labels: { context, label, topic },
-          });
+          await internal.safeExec(
+            async () => await exec(message as DATA, packet),
+          );
         });
         CALLBACKS.set(topic, callbacks);
       });
