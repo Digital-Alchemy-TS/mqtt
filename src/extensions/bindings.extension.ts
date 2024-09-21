@@ -18,9 +18,7 @@ import {
 } from "..";
 
 // Function to translate readable options to MQTT options
-function translateOptions(
-  options: SubscriptionOptions,
-): IClientSubscribeOptions {
+function translateOptions(options: SubscriptionOptions): IClientSubscribeOptions {
   return {
     nl: options.noLocal,
     qos: options.qualityOfService as QoS,
@@ -115,39 +113,31 @@ export function MQTT_Bindings({
   }
 
   function initRouting() {
-    client.on(
-      "message",
-      async (topic: string, payload: Buffer, packet: Packet) => {
-        const topicMatches = [...CALLBACKS.keys()].filter(i =>
-          TOPIC_REGEX.get(i).test(topic),
-        );
-        // Blast through everything all at once
-        let parseTracker: MQTTParseFormat;
-        await each(topicMatches, async topicMatch => {
-          const parseFormat = MESSAGE_PARSE.get(topicMatch);
-          if (is.empty(parseTracker)) {
-            parseTracker = parseFormat;
-          } else if (parseTracker !== parseFormat) {
-            // An extra sanity check
-            logger.warn(
-              {
-                currentFormat: parseFormat,
-                firstFormat: parseTracker,
-                topic,
-                topicMatches,
-              },
-              `message has multiple topic matches, with different parse formats`,
-            );
-          }
-          await each(CALLBACKS.get(topicMatch), async exec => {
-            await exec(
-              parseMessage(payload.toString("utf8"), parseFormat),
-              packet,
-            );
-          });
+    client.on("message", async (topic: string, payload: Buffer, packet: Packet) => {
+      const topicMatches = [...CALLBACKS.keys()].filter(i => TOPIC_REGEX.get(i).test(topic));
+      // Blast through everything all at once
+      let parseTracker: MQTTParseFormat;
+      await each(topicMatches, async topicMatch => {
+        const parseFormat = MESSAGE_PARSE.get(topicMatch);
+        if (is.empty(parseTracker)) {
+          parseTracker = parseFormat;
+        } else if (parseTracker !== parseFormat) {
+          // An extra sanity check
+          logger.warn(
+            {
+              currentFormat: parseFormat,
+              firstFormat: parseTracker,
+              topic,
+              topicMatches,
+            },
+            `message has multiple topic matches, with different parse formats`,
+          );
+        }
+        await each(CALLBACKS.get(topicMatch), async exec => {
+          await exec(parseMessage(payload.toString("utf8"), parseFormat), packet);
         });
-      },
-    );
+      });
+    });
   }
 
   function publish(
@@ -171,8 +161,6 @@ export function MQTT_Bindings({
   function subscribe<DATA = unknown>({
     topic,
     exec,
-    context = bindingsContext,
-    label,
     parse = "none",
     options = {},
   }: MQTTSubscribeOptions<DATA>): void {
@@ -194,9 +182,7 @@ export function MQTT_Bindings({
         listen(topic, { ...translateOptions(options), qos: 1 });
         const callbacks = CALLBACKS.get(topic) ?? ([] as MqttCallback[]);
         callbacks.push(async (message, packet) => {
-          await internal.safeExec(
-            async () => await exec(message as DATA, packet),
-          );
+          await internal.safeExec(async () => await exec(message as DATA, packet));
         });
         CALLBACKS.set(topic, callbacks);
       });
