@@ -23,11 +23,7 @@ export type MQTTSubscribeOptions<DATA = unknown> = {
   exec: MqttCallback<DATA>;
   context: TContext;
   parse?: MQTTParseFormat;
-  label?: string;
   options?: SubscriptionOptions;
 };
 
-export type MqttCallback<DATA = unknown> = (
-  payload: DATA,
-  packet?: Packet,
-) => TBlackHole;
+export type MqttCallback<DATA = unknown> = (payload: DATA, packet?: Packet) => TBlackHole;
