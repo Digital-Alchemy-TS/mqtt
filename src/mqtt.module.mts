@@ -1,7 +1,7 @@
 import { CreateLibrary } from "@digital-alchemy/core";
 import { IClientOptions } from "mqtt";
 
-import { MQTT_Bindings, Publish, Subscribe } from "./extensions";
+import { MQTT_Bindings, Publish, Subscribe } from "./services/index.mts";
 
 export const LIB_MQTT = CreateLibrary({
   configuration: {

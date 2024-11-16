@@ -9,13 +9,13 @@ import {
 } from "mqtt";
 import { QoS } from "mqtt-packet";
 
+import { MQTT_RECONNECT } from "../helpers/events.mts";
 import {
-  MQTT_RECONNECT,
   MqttCallback,
   MQTTParseFormat,
   MQTTSubscribeOptions,
   SubscriptionOptions,
-} from "..";
+} from "../helpers/types.mts";
 
 // Function to translate readable options to MQTT options
 function translateOptions(options: SubscriptionOptions): IClientSubscribeOptions {
